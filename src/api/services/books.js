@@ -1,4 +1,9 @@
+import _ from "lodash";
+import APIError from "../../common/middleware/api-error.js";
 import Book from "../models/books.js";
+import httpStatus from "http-status";
+
+const { NOT_FOUND } = httpStatus;
 
 const BooksServices = {
   /**
@@ -10,6 +15,12 @@ const BooksServices = {
    */
   async listBooks({ limit }) {
     const books = await Book.findAll({ limit });
+    if (_.isNil(books)) {
+      throw new APIError({
+        message: "hi this is me",
+        status: NOT_FOUND,
+      });
+    }
     return books;
   },
 };
