@@ -8,8 +8,8 @@ const BooksServices = {
    * @param {Object} args
    *
    */
-  async listBooks() {
-    const books = await Book.findAll();
+  async listBooks({ limit }) {
+    const books = await Book.findAll({ limit });
     return books;
   },
 };

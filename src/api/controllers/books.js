@@ -6,7 +6,10 @@ const { OK } = httpStatus;
 const BooksController = {
   async listBooks(req, res, next) {
     try {
-      const books = await BooksServices.listBooks();
+      const { limit } = req.query;
+
+      const books = await BooksServices.listBooks({ limit });
+
       return res.status(OK).send(books);
     } catch (err) {
       return next(err);
