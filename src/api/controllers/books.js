@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import BooksServices from "../services/books.js";
 import httpStatus from "http-status";
 
@@ -5,15 +6,11 @@ const { OK } = httpStatus;
 
 const BooksController = {
   async listBooks(req, res, next) {
-    try {
-      const { limit } = req.query;
+    const { limit } = req.query;
 
-      const books = await BooksServices.listBooks({ limit });
+    const books = await BooksServices.listBooks({ limit });
 
-      return res.status(OK).send(books);
-    } catch (err) {
-      return next(err);
-    }
+    return res.status(OK).send(books);
   },
 };
 
