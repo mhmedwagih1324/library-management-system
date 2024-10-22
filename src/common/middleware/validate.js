@@ -19,7 +19,8 @@ export const validate = (schema) => {
 
       if (!_.isNil(error)) {
         error.source = "params";
-        return res.status(BAD_REQUEST).json(error);
+        error.status = BAD_REQUEST;
+        return next(error);
       }
 
       req.params = validatedParams;
@@ -32,7 +33,8 @@ export const validate = (schema) => {
 
       if (!_.isNil(error)) {
         error.source = "query";
-        return res.status(BAD_REQUEST).json(error);
+        error.status = BAD_REQUEST;
+        return next(error);
       }
 
       req.query = validatedQuery;
@@ -43,10 +45,11 @@ export const validate = (schema) => {
 
       if (!_.isNil(error)) {
         error.source = "body";
-        return res.status(BAD_REQUEST).json(error);
+        error.status = BAD_REQUEST;
+        return next(error);
       }
 
-      req.query = validatedBody;
+      req.body = validatedBody;
     }
 
     next();
