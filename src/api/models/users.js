@@ -22,6 +22,7 @@ const User = sequelize.define(
       validate: {
         is: EMAIL_REGEX,
       },
+      unique: true,
     },
     registerDate: {
       type: DataTypes.DATE,
