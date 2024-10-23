@@ -19,6 +19,7 @@ const User = sequelize.define(
     },
     email: {
       type: DataTypes.STRING,
+      unique: true,
       validate: {
         is: EMAIL_REGEX,
       },
@@ -38,7 +39,20 @@ const User = sequelize.define(
       allowNull: false,
     },
   },
-  { tableName: USERS_TABLE }
+  {
+    tableName: USERS_TABLE,
+    hooks: {
+      beforeBulkCreate: async function (users) {
+        await Promise.map(users, async (user) => {
+          user.password = await bcrypt.hash(user.dataValues.password, 10);
+        });
+      },
+
+      beforeCreate: async function (user) {
+        user.password = await bcrypt.hash(user.dataValues.password, 10);
+      },
+    },
+  }
 );
 
 export default User;
