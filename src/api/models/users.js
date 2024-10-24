@@ -2,6 +2,8 @@ import { DataTypes } from "sequelize";
 import sequelize from "../../config/db.js";
 import { EMAIL_REGEX } from "../../common/constants.js";
 import { ALL_ROLES, BORROWER, USERS_TABLE } from "../constants/users.js";
+import Promise from "bluebird";
+import bcrypt from "bcrypt";
 
 const User = sequelize.define(
   "User",
