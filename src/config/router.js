@@ -1,10 +1,10 @@
 import { Router } from "express";
 import BooksRouter from "../api/routers/books.js";
-import BorrowersRouter from "../api/routers/borrowers.js";
+import usersRouter from "../api/routers/users.js";
 
 const router = Router();
 
 router.use("/books", BooksRouter);
-router.use("/borrowers", BorrowersRouter);
+router.use("/users", usersRouter);
 
 export default router;
