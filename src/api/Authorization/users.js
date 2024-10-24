@@ -1,4 +1,4 @@
-import { ADMIN } from "../constants";
+import { ADMIN } from "../constants.js";
 import User from "../models/users";
 
 /**
