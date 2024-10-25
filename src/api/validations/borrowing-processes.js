@@ -6,6 +6,12 @@ const BorrowingProcessValidation = {
       id: UUIDV4Schema,
     },
   },
+
+  returnBook: {
+    params: {
+      id: UUIDV4Schema,
+    },
+  },
 };
 
 export default BorrowingProcessValidation;

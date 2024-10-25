@@ -6,6 +6,7 @@ import { Book, BorrowingProcess } from "../models/index.js";
 import {
   BORROWING_PROCESS_DEFAULT_PERIOD,
   BORROWING_STATUS_BORROWED,
+  BORROWING_STATUS_RETURNED,
 } from "../constants/borrowingProcess.js";
 import moment from "moment";
 
@@ -79,6 +80,73 @@ const BorrowingProcessesServices = {
         message: `Couldn't create borrowing-process: ${error.message}`,
       });
     }
+    return { borrowingProcess };
+  },
+
+  /**
+   * performs a book return process
+   *
+   * @param {Object} args
+   * @prop {String} args.bookId
+   *
+   * @param {Object} callerData
+   * @prop {Object} callerData.callerId
+   *
+   * @returns {Promise<{Object}>} { borrowingProcess }
+   */
+  async returnBook({ bookId }, { callerId }) {
+    const borrowerId = callerId;
+
+    const book = await Book.findOne({ raw: true, where: { id: bookId } });
+
+    if (_.isNil(book)) {
+      throw new APIError({ message: "book not found", status: NOT_FOUND });
+    }
+
+    const earlierBorrowing = await BorrowingProcess.findOne({
+      raw: true,
+      where: { bookId, borrowerId, status: BORROWING_STATUS_BORROWED },
+    });
+
+    if (_.isNil(earlierBorrowing)) {
+      throw new APIError({
+        message: "book is not currently borrowed by you",
+        status: UNPROCESSABLE_ENTITY,
+      });
+    }
+
+    /* NOTE: The following process doesn't need to be done as transaction, 
+      as when creating a borrowing process for a book that is currently was available
+      both try to decrement the book available_quantity first and if this wasn't successful,
+      the next transaction (creating the borrowing process) wouldn't run.
+    */
+    let updatedBorrowingProcesses;
+    try {
+      await Book.increment(
+        { available_quantity: 1 },
+        { where: { id: bookId } }
+      );
+
+      updatedBorrowingProcesses = await BorrowingProcess.update(
+        {
+          status: BORROWING_STATUS_RETURNED,
+        },
+        {
+          where: {
+            id: earlierBorrowing.id,
+          },
+          returning: true,
+        }
+      );
+    } catch (error) {
+      throw new APIError({
+        status: CONFLICT,
+        message: `Couldn't update borrowing-process: ${error.message}`,
+      });
+    }
+
+    const [borrowingProcess] = updatedBorrowingProcesses[1];
+
     return { borrowingProcess };
   },
 };

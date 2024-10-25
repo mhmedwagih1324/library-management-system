@@ -17,4 +17,12 @@ router.post(
   tryCatch(BorrowingProcessesController.checkoutBook)
 );
 
+router.post(
+  "/return-book/:id",
+  authenticate,
+  authorize(BorrowingProcessesAuthorization.returnBook),
+  validate(BorrowingProcessValidation.returnBook),
+  tryCatch(BorrowingProcessesController.returnBook)
+);
+
 export default router;

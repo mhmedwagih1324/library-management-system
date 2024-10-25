@@ -4,6 +4,10 @@ const BorrowingProcessesAuthorization = {
   checkoutBook: {
     roles: [BORROWER],
   },
+
+  returnBook: {
+    roles: [BORROWER],
+  },
 };
 
 export default BorrowingProcessesAuthorization;

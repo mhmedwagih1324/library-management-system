@@ -16,6 +16,17 @@ const BorrowingProcessController = {
 
     return res.status(CREATED).json(result);
   },
+
+  async returnBook(req, res, next) {
+    const { id: bookId } = req.params;
+    const { id: callerId } = req.user;
+    const result = await BorrowingProcessesServices.checkoutBook(
+      { bookId },
+      { callerId }
+    );
+
+    return res.status(CREATED).json(result);
+  },
 };
 
 export default BorrowingProcessController;
