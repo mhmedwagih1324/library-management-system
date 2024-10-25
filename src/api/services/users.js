@@ -6,8 +6,9 @@ import _ from "lodash";
 import jwt from "jsonwebtoken";
 import { config } from "../../common/env-variables.js";
 import { TOKEN_EXPIRATION_PERIOD } from "../../common/constants/authentication.js";
+import { ADMIN } from "../constants/users.js";
 
-const { CONFLICT, NOT_FOUND, UNAUTHORIZED } = httpStatus;
+const { CONFLICT, NOT_FOUND, UNAUTHORIZED, BAD_REQUEST } = httpStatus;
 
 const UsersServices = {
   /**
@@ -34,6 +35,71 @@ const UsersServices = {
         message: `Couldn't create borrower: ${error.message}`,
       });
     }
+    return { borrower: _.omit(borrower.dataValues, ["password"]) };
+  },
+
+  /**
+   * Updates a borrower's information
+   *
+   * @param {Object} args
+   * @prop {String} args.id
+   * @prop {String} args.name
+   * @prop {String} args.email
+   * @prop {String} args.password
+   *
+   * @param {Object} callerData
+   * @prop {String} callerData.caller
+   *
+   * @returns {Promise<{Object}>} { borrower }
+   */
+  async updateBorrower({ userId, name, email, password }, { caller }) {
+    const user = await User.findOne({ raw: true, where: { id: userId } });
+
+    if (_.isNil(user)) {
+      if (_.isNil(user)) {
+        throw new APIError({ status: NOT_FOUND, message: "User not found" });
+      }
+    }
+
+    if (
+      userId !== caller.id &&
+      (caller.role !== ADMIN || user.role === ADMIN)
+    ) {
+      throw new APIError({ status: UNAUTHORIZED, message: "User not found" });
+    }
+
+    const updateObject = {};
+
+    if (name && name !== user.name) {
+      updateObject.name = name;
+    }
+
+    if (email && email !== user.email) {
+      updateObject.email = email;
+    }
+
+    if (password) {
+      updateObject.password = password;
+    }
+
+    if (_.isEmpty(updateObject)) {
+      throw new APIError({ message: "Nothing to update", status: BAD_REQUEST });
+    }
+
+    let updatedBorrowers;
+    try {
+      updatedBorrowers = await User.update(updateObject, {
+        where: { id: userId },
+        returning: true,
+      });
+    } catch (err) {
+      throw new APIError({
+        status: CONFLICT,
+        message: `Couldn't update book details: ${err.message}`,
+      });
+    }
+
+    const [borrower] = updatedBorrowers[1];
     return { borrower: _.omit(borrower.dataValues, ["password"]) };
   },
 

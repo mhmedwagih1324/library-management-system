@@ -3,7 +3,7 @@ import sequelize from "../../config/db.js";
 import { EMAIL_REGEX } from "../../common/constants.js";
 import { ALL_ROLES, BORROWER, USERS_TABLE } from "../constants/users.js";
 import Promise from "bluebird";
-import bcrypt from "bcrypt";
+import hashPassword from "../../common/utils/hashPasswords.js";
 
 const User = sequelize.define(
   "User",
@@ -45,13 +45,13 @@ const User = sequelize.define(
     tableName: USERS_TABLE,
     hooks: {
       beforeBulkCreate: async function (users) {
-        await Promise.map(users, async (user) => {
-          user.password = await bcrypt.hash(user.dataValues.password, 10);
-        });
+        await Promise.map(users, hashPassword);
       },
 
-      beforeCreate: async function (user) {
-        user.password = await bcrypt.hash(user.dataValues.password, 10);
+      beforeCreate: hashPassword,
+
+      beforeUpdate: async function (users) {
+        await Promise.map(users, hashPassword);
       },
     },
   }

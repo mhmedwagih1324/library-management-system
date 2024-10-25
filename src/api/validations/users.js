@@ -10,6 +10,14 @@ const UsersValidation = {
     },
   },
 
+  updateBorrower: {
+    body: {
+      name: Joi.string().min(6),
+      email: Joi.string().min(6).max(320).regex(EMAIL_REGEX),
+      password: Joi.string().min(6).max(250),
+    },
+  },
+
   authenticateUser: {
     body: {
       email: Joi.string().min(6).max(320).regex(EMAIL_REGEX).required(),

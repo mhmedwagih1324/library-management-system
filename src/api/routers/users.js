@@ -17,6 +17,14 @@ router.post(
   tryCatch(UsersController.registerBorrower)
 );
 
+router.put(
+  "/borrowers/:id",
+  authenticate,
+  authorize(UsersAuthorization.updateBorrower),
+  validate(UsersValidation.updateBorrower),
+  tryCatch(UsersController.updateBorrower)
+);
+
 router.post(
   "/authenticate",
   validate(UsersValidation.authenticateUser),
