@@ -1,10 +1,14 @@
 import { Router } from "express";
-import BooksRouter from "../api/routers/books.js";
-import usersRouter from "../api/routers/users.js";
+import {
+  BorrowingProcessesRouter,
+  UsersRouter,
+  BooksRouter,
+} from "../api/routers/index.js";
 
 const router = Router();
 
 router.use("/books", BooksRouter);
-router.use("/users", usersRouter);
+router.use("/users", UsersRouter);
+router.use("/borrowingProcesses", BorrowingProcessesRouter);
 
 export default router;

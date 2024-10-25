@@ -31,6 +31,9 @@ const Book = sequelize.define(
     available_quantity: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
+      validate: {
+        min: 0,
+      },
     },
     shelf_location: {
       type: DataTypes.ENUM,

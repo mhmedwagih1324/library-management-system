@@ -7,3 +7,5 @@ export const BORROWING_STATUSES = [
 ];
 
 export const BORROWING_PROCESS_TABLE = "borrowing_processes";
+
+export const BORROWING_PROCESS_DEFAULT_PERIOD = 7; // Amount in days
