@@ -23,4 +23,12 @@ router.post(
   tryCatch(BooksController.addBook)
 );
 
+router.put(
+  "/:id",
+  authenticate,
+  authorize(BooksAuthorization.updateBook),
+  validate(BooksValidation.updateBook),
+  tryCatch(BooksController.updateBook)
+);
+
 export default router;

@@ -55,6 +55,60 @@ const BooksServices = {
 
     return { book };
   },
+
+  /**
+   * Updates details of a book in the library
+   *
+   * @param {Object} args
+   * @prop {String} args.id
+   * @prop {String} args.title
+   * @prop {String} args.author
+   * @prop {String} args.isbn
+   * @prop {Number} args.availableQuantity
+   * @prop {String} args.shelfLocation
+   *
+   * @return {Promise<Object>} { book }
+   */
+  async updateBook({
+    id,
+    title,
+    author,
+    isbn,
+    availableQuantity,
+    shelfLocation,
+  }) {
+    let book = await Book.findOne({ raw: true, where: { id } });
+
+    if (_.isNil(book)) {
+      throw new APIError({ message: "book not found", status: NOT_FOUND });
+    }
+
+    let updatedBooks;
+    try {
+      updatedBooks = await Book.update(
+        {
+          title,
+          author,
+          isbn,
+          available_quantity: availableQuantity,
+          shelf_location: shelfLocation,
+        },
+        {
+          where: { id },
+          returning: true,
+        }
+      );
+    } catch (err) {
+      throw new APIError({
+        status: CONFLICT,
+        message: `Couldn't update book details: ${err.message}`,
+      });
+    }
+
+    [book] = updatedBooks[1];
+
+    return { book };
+  },
 };
 
 export default BooksServices;

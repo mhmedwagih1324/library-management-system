@@ -4,6 +4,9 @@ const BooksAuthorization = {
   addBook: {
     roles: [ADMIN],
   },
+  updateBook: {
+    roles: [ADMIN],
+  },
 };
 
 export default BooksAuthorization;
