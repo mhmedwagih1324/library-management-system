@@ -1,2 +1,2 @@
-export * from "./books.js";
-export * from "./users.js";
+export { default as BooksValidation } from "./books.js";
+export { default as UsersValidation } from "./users.js";

@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import APIError from "../../common/middleware/api-error.js";
+import APIError from "../../common/lib/api-error.js";
 import httpStatus from "http-status";
 import User from "../models/users.js";
 import _ from "lodash";
@@ -47,41 +47,7 @@ const UsersServices = {
    * @returns {Promise<{Object}>} { jwtToken }
    */
   async authenticateUser({ email, password }) {
-    const { dataValues: user } = await User.findOne({ where: { email } });
-
-    if (_.isNil(user)) {
-      throw new APIError({ status: NOT_FOUND, message: "User not found" });
-    }
-
-    const isMatch = await bcrypt.compare(password, user.password);
-
-    if (!isMatch) {
-      throw new APIError({
-        status: UNAUTHORIZED,
-        message: "Wrong email or password",
-      });
-    }
-
-    const payload = { ..._.omit(user, "password") };
-
-    const jwtToken = jwt.sign(payload, config.JWT_SECRET, {
-      expiresIn: TOKEN_EXPIRATION_PERIOD,
-    });
-
-    return { jwtToken };
-  },
-
-  /**
-   * Authenticates a user in the system
-   *
-   * @param {Object} args
-   * @param {String} args.email
-   * @param {String} args.password
-   *
-   * @returns {Promise<{Object}>} { jwtToken }
-   */
-  async authenticateUser({ email, password }) {
-    const { dataValues: user } = await User.findOne({ where: { email } });
+    let user = await User.findOne({ where: { email }, raw: true });
 
     if (_.isNil(user)) {
       throw new APIError({ status: NOT_FOUND, message: "User not found" });

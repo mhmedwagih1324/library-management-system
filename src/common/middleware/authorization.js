@@ -1,5 +1,5 @@
 import _ from "lodash";
-import APIError from "./api-error.js";
+import APIError from "../lib/api-error.js";
 import httpStatus from "http-status";
 
 const { UNAUTHORIZED } = httpStatus;

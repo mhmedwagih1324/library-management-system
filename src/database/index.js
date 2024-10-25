@@ -1,1 +1,1 @@
-export * from "./seed.js";
+export { default as seedDatabase } from "./seed.js";
