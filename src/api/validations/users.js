@@ -18,6 +18,13 @@ const UsersValidation = {
     },
   },
 
+  listCallerBorrowingProcesses: {
+    query: {
+      limit: Joi.number().min(5).max(100).default(25).allow(-1),
+      offset: Joi.number().min(0).default(0),
+    },
+  },
+
   authenticateUser: {
     body: {
       email: Joi.string().min(6).max(320).regex(EMAIL_REGEX).required(),

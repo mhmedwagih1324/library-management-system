@@ -1,12 +1,13 @@
 import bcrypt from "bcrypt";
 import APIError from "../../common/lib/api-error.js";
 import httpStatus from "http-status";
-import User from "../models/users.js";
+import { User, BorrowingProcess } from "../models/index.js";
 import _ from "lodash";
 import jwt from "jsonwebtoken";
 import { config } from "../../common/env-variables.js";
 import { TOKEN_EXPIRATION_PERIOD } from "../../common/constants/authentication.js";
 import { ADMIN } from "../constants/users.js";
+import { BORROWING_STATUS_BORROWED } from "../constants/index.js";
 
 const { CONFLICT, NOT_FOUND, UNAUTHORIZED, BAD_REQUEST } = httpStatus;
 
@@ -135,6 +136,31 @@ const UsersServices = {
     });
 
     return { jwtToken };
+  },
+
+  /**
+   * retrieves caller currently borrowed books
+   *
+   * @param {Object} args
+   * @prop {Number} args.limit
+   * @prop {Number} args.offset
+   *
+   * @param {Object} callerData
+   * @prop {Object} callerData.callerId
+   *
+   * @returns {Promise<{Object}>} { borrowingProcesses }
+   */
+  async listCallerBorrowingProcesses({ limit, offset }, { callerId }) {
+    const borrowerId = callerId;
+
+    const borrowingProcesses = await BorrowingProcess.findAll({
+      raw: true,
+      where: { borrowerId, status: BORROWING_STATUS_BORROWED },
+      limit: limit !== -1 ? limit : null,
+      offset: limit !== -1 ? offset : null,
+    });
+
+    return { borrowingProcesses };
   },
 };
 

@@ -27,6 +27,18 @@ const UsersController = {
 
     return res.status(OK).json(result);
   },
+
+  async listCallerBorrowingProcesses(req, res, next) {
+    const { limit, offset } = req.query;
+    const { id: callerId } = req.user;
+
+    const result = await UsersServices.listCallerBorrowingProcesses(
+      { limit, offset },
+      { callerId }
+    );
+
+    return res.status(OK).json(result);
+  },
 };
 
 export default UsersController;

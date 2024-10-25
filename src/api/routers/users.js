@@ -25,6 +25,14 @@ router.put(
   tryCatch(UsersController.updateBorrower)
 );
 
+router.get(
+  "/me/borrowing-processes",
+  authenticate,
+  authorize(UsersAuthorization.listCallerBorrowingProcesses),
+  validate(UsersValidation.listCallerBorrowingProcesses),
+  tryCatch(UsersController.listCallerBorrowingProcesses)
+);
+
 router.post(
   "/authenticate",
   validate(UsersValidation.authenticateUser),

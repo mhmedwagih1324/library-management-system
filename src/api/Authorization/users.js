@@ -4,8 +4,13 @@ const UsersAuthorization = {
   registerBorrower: {
     roles: [ADMIN],
   },
+
   updateBorrower: {
     roles: [ADMIN, BORROWER],
+  },
+
+  listCallerBorrowingProcesses: {
+    roles: [BORROWER],
   },
 };
 
