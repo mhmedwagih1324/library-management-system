@@ -1,17 +1,28 @@
 import _ from "lodash";
+import APIError from "./api-error.js";
+import httpStatus from "http-status";
+
+const { UNAUTHORIZED } = httpStatus;
 
 /**
+ * Middleware accepts roles array to validate on the caller role
  *
- * @param {Object} user
  * @param {Array} roles
- * @returns
+ *
+ * @returns {Boolean} haveAccess
  */
-export const isAuthorized = (user, roles) => {
-  let haveAccess = true;
+export const authorize =
+  ({ roles }) =>
+  (req, res, next) => {
+    const { user } = req;
 
-  if (!_.isNil(roles) && _.isArray(roles)) {
-    haveAccess = roles.includes(user.baseRole.name);
-  }
+    let haveAccess = true;
 
-  return haveAccess;
-};
+    if (!_.isNil(roles) && _.isArray(roles)) {
+      haveAccess = roles.includes(user.role);
+    }
+
+    return haveAccess
+      ? next()
+      : next(new APIError({ message: "Unauthorized", status: UNAUTHORIZED }));
+  };
