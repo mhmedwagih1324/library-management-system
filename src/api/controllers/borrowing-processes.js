@@ -20,7 +20,7 @@ const BorrowingProcessController = {
   async returnBook(req, res, next) {
     const { id: bookId } = req.params;
     const { id: callerId } = req.user;
-    const result = await BorrowingProcessesServices.checkoutBook(
+    const result = await BorrowingProcessesServices.returnBook(
       { bookId },
       { callerId }
     );

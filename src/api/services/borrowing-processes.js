@@ -115,11 +115,6 @@ const BorrowingProcessesServices = {
       });
     }
 
-    /* NOTE: The following process doesn't need to be done as transaction, 
-      as when creating a borrowing process for a book that is currently was available
-      both try to decrement the book available_quantity first and if this wasn't successful,
-      the next transaction (creating the borrowing process) wouldn't run.
-    */
     let updatedBorrowingProcesses;
     try {
       await Book.increment(
