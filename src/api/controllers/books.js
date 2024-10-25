@@ -2,7 +2,7 @@
 import BooksServices from "../services/books.js";
 import httpStatus from "http-status";
 
-const { OK } = httpStatus;
+const { OK, CREATED } = httpStatus;
 
 const BooksController = {
   async listBooks(req, res, next) {
@@ -11,6 +11,12 @@ const BooksController = {
     const books = await BooksServices.listBooks({ limit });
 
     return res.status(OK).send(books);
+  },
+
+  async addBook(req, res, next) {
+    const result = await BooksServices.addBook({ ...req.body });
+
+    return res.status(CREATED).json(result);
   },
 };
 

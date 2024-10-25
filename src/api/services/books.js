@@ -1,9 +1,9 @@
 import _ from "lodash";
-import APIError from "../../common/middleware/api-error.js";
+import APIError from "../../common/lib/api-error.js";
 import Book from "../models/books.js";
 import httpStatus from "http-status";
 
-const { NOT_FOUND } = httpStatus;
+const { NOT_FOUND, CONFLICT } = httpStatus;
 
 const BooksServices = {
   /**
@@ -22,6 +22,38 @@ const BooksServices = {
       });
     }
     return books;
+  },
+
+  /**
+   * Adds new book in the library
+   *
+   * @param {Object} args
+   * @prop {String} args.title
+   * @prop {String} args.author
+   * @prop {String} args.isbn
+   * @prop {Number} args.availableQuantity
+   * @prop {String} args.shelfLocation
+   *
+   * @return {Promise<Object>} { book }
+   */
+  async addBook({ title, author, isbn, availableQuantity, shelfLocation }) {
+    let book;
+    try {
+      book = await Book.create({
+        title,
+        author,
+        isbn,
+        available_quantity: availableQuantity,
+        shelf_location: shelfLocation,
+      });
+    } catch (err) {
+      throw new APIError({
+        status: CONFLICT,
+        message: `Couldn't create book: ${err.message}`,
+      });
+    }
+
+    return { book };
   },
 };
 
