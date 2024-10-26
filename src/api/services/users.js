@@ -6,7 +6,7 @@ import _ from "lodash";
 import jwt from "jsonwebtoken";
 import { config } from "../../common/env-variables.js";
 import { TOKEN_EXPIRATION_PERIOD } from "../../common/constants/authentication.js";
-import { ADMIN } from "../constants/users.js";
+import { ADMIN, BORROWER } from "../constants/users.js";
 import { BORROWING_STATUS_BORROWED } from "../constants/index.js";
 
 const { CONFLICT, NOT_FOUND, UNAUTHORIZED, BAD_REQUEST } = httpStatus;
@@ -161,6 +161,38 @@ const UsersServices = {
     });
 
     return { borrowingProcesses };
+  },
+
+  /**
+   * deletes a borrower from library
+   *
+   * @param {Object} args
+   * @prop {String} args.borrowerId
+   *
+   * @return {Promise<Object>} { borrower }
+   */
+  async deleteBorrower({ borrowerId }) {
+    const borrower = await User.findOne({
+      raw: true,
+      where: { id: borrowerId, role: BORROWER },
+    });
+
+    if (_.isNil(borrower)) {
+      throw new APIError({ message: "borrower not found", status: NOT_FOUND });
+    }
+
+    try {
+      await User.destroy({
+        where: { id: borrowerId },
+      });
+    } catch (err) {
+      throw new APIError({
+        status: CONFLICT,
+        message: `Couldn't delete borrower, details: ${err.message}`,
+      });
+    }
+
+    return { borrower };
   },
 };
 

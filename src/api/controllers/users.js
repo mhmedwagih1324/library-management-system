@@ -39,6 +39,14 @@ const UsersController = {
 
     return res.status(OK).json(result);
   },
+
+  async deleteBorrower(req, res, next) {
+    const { id: borrowerId } = req.params;
+
+    const result = await UsersServices.deleteBorrower({ borrowerId });
+
+    return res.status(ACCEPTED).json(result);
+  },
 };
 
 export default UsersController;

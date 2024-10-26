@@ -1,5 +1,6 @@
 import Joi from "joi";
 import { EMAIL_REGEX } from "../../common/constants.js";
+import { UUIDV4Schema } from "../../common/schemas/joi-schemas.js";
 
 const UsersValidation = {
   registerBorrower: {
@@ -11,6 +12,9 @@ const UsersValidation = {
   },
 
   updateBorrower: {
+    params: {
+      id: UUIDV4Schema,
+    },
     body: {
       name: Joi.string().min(6),
       email: Joi.string().min(6).max(320).regex(EMAIL_REGEX),
@@ -29,6 +33,12 @@ const UsersValidation = {
     body: {
       email: Joi.string().min(6).max(320).regex(EMAIL_REGEX).required(),
       password: Joi.string().min(6).max(250).required(),
+    },
+  },
+
+  deleteBorrower: {
+    params: {
+      id: UUIDV4Schema,
     },
   },
 };

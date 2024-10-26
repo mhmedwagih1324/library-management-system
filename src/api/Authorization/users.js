@@ -12,6 +12,10 @@ const UsersAuthorization = {
   listCallerBorrowingProcesses: {
     roles: [BORROWER],
   },
+
+  deleteBorrower: {
+    roles: [ADMIN],
+  },
 };
 
 export default UsersAuthorization;

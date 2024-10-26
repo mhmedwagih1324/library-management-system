@@ -39,4 +39,12 @@ router.post(
   tryCatch(UsersController.authenticateUser)
 );
 
+router.delete(
+  "/borrowers/:id",
+  authenticate,
+  authorize(UsersAuthorization.deleteBorrower),
+  validate(UsersValidation.deleteBorrower),
+  tryCatch(UsersController.deleteBorrower)
+);
+
 export default router;
