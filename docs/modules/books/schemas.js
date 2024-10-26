@@ -106,3 +106,12 @@ export const AddBookRequestSchema = {
     },
   },
 };
+
+export const UpdateBookRequestSchema = {
+  ...AddBookRequestSchema,
+  required: [],
+};
+
+export const UpdateBookResponseSchema = AddBookResponseSchema;
+
+export const DeleteBookResponseSchema = AddBookResponseSchema;

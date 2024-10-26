@@ -145,7 +145,7 @@ const BooksServices = {
 
     [book] = updatedBooks[1];
 
-    return { book };
+    return { book: _.omit(book.dataValues, ["TSValue"]) };
   },
 
   /**
@@ -157,7 +157,11 @@ const BooksServices = {
    * @return {Promise<Object>} { book }
    */
   async deleteBook({ bookId }) {
-    const book = await Book.findOne({ raw: true, where: { id: bookId } });
+    const book = await Book.findOne({
+      raw: true,
+      where: { id: bookId },
+      attributes: { exclude: ["TSValue"] },
+    });
 
     if (_.isNil(book)) {
       throw new APIError({ message: "book not found", status: NOT_FOUND });
