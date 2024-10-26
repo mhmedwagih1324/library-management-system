@@ -10,7 +10,7 @@ import UsersAuthorization from "../Authorization/users.js";
 const router = new Router();
 
 router.post(
-  "/register-borrower",
+  "/borrowers",
   authenticate,
   authorize(UsersAuthorization.registerBorrower),
   validate(UsersValidation.registerBorrower),

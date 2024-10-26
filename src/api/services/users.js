@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import APIError from "../../common/lib/api-error.js";
 import httpStatus from "http-status";
-import { User, BorrowingProcess } from "../models/index.js";
+import { User, BorrowingProcess, Book } from "../models/index.js";
 import _ from "lodash";
 import jwt from "jsonwebtoken";
 import { config } from "../../common/env-variables.js";
@@ -9,7 +9,7 @@ import { TOKEN_EXPIRATION_PERIOD } from "../../common/constants/authentication.j
 import { ADMIN, BORROWER } from "../constants/users.js";
 import { BORROWING_STATUS_BORROWED } from "../constants/index.js";
 
-const { CONFLICT, NOT_FOUND, UNAUTHORIZED, BAD_REQUEST } = httpStatus;
+const { CONFLICT, NOT_FOUND, BAD_REQUEST, FORBIDDEN } = httpStatus;
 
 const UsersServices = {
   /**
@@ -66,7 +66,10 @@ const UsersServices = {
       userId !== caller.id &&
       (caller.role !== ADMIN || user.role === ADMIN)
     ) {
-      throw new APIError({ status: UNAUTHORIZED, message: "User not found" });
+      throw new APIError({
+        status: FORBIDDEN,
+        message: "Unauthorized Action",
+      });
     }
 
     const updateObject = {};
@@ -96,7 +99,7 @@ const UsersServices = {
     } catch (err) {
       throw new APIError({
         status: CONFLICT,
-        message: `Couldn't update book details: ${err.message}`,
+        message: `Couldn't update borrower details: ${err.message}`,
       });
     }
 
@@ -124,7 +127,7 @@ const UsersServices = {
 
     if (!isMatch) {
       throw new APIError({
-        status: UNAUTHORIZED,
+        status: FORBIDDEN,
         message: "Wrong email or password",
       });
     }
@@ -158,6 +161,13 @@ const UsersServices = {
       where: { borrowerId, status: BORROWING_STATUS_BORROWED },
       limit: limit !== -1 ? limit : null,
       offset: limit !== -1 ? offset : null,
+      attributes: ["id", "dueDate", "createdAt"],
+      include: [
+        {
+          model: Book,
+          attributes: ["title", "author", "availableQuantity"],
+        },
+      ],
     });
 
     return { borrowingProcesses };

@@ -44,7 +44,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZjZGRmMzM4LWVjNzEtNDg0ZS05NWNiLTU1YjAxNTc5NTAxNyIsIm5hbWUiOiJBbGljZSBTbWl0aCIsImVtYWlsIjoiYWxpY2Uuc21pdGhAZXhhbXBsZS5jb20iLCJyZWdpc3RlckRhdGUiOiIyMDIzLTAxLTE1VDEwOjAwOjAwLjAwMFoiLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjA1OjAzLjk0MloiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjA1OjAzLjk0MloiLCJpYXQiOjE3Mjk5NDc5MjgsImV4cCI6MTcyOTk1MTUyOH0.mHTSkKTMPc2YRu0kgpdkHvJBmSVPho2vN2oKnd87mN0",
+								"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE0OTU4ZWMyLTJjOGYtNGUwYi1hNGY0LWI1NTdlMjIwMDU4NyIsIm5hbWUiOiJBbGljZSBTbWl0aCIsImVtYWlsIjoiYWxpY2Uuc21pdGhAZXhhbXBsZS5jb20iLCJyZWdpc3RlckRhdGUiOiIyMDIzLTAxLTE1VDEwOjAwOjAwLjAwMFoiLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTI2VDE3OjAwOjE4LjgwOVoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTI2VDE3OjAwOjE4LjgwOVoiLCJpYXQiOjE3Mjk5NjIxNDgsImV4cCI6MTcyOTk2NTc0OH0.OZSkQNziDSsI9OIG1jRlVZ6DMFcgFiqz-twx3IvpjZs",
 								"type": "text"
 							}
 						],
@@ -58,13 +58,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}api/users/register-borrower",
+							"raw": "{{base_url}}api/users/borrowers",
 							"host": [
 								"{{base_url}}api"
 							],
 							"path": [
 								"users",
-								"register-borrower"
+								"borrowers"
 							]
 						}
 					},
@@ -80,7 +80,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM4MWY4Y2YxLWIyYTItNGI3OC1hODNhLWM0Yjc1YTVlZTQzYSIsIm5hbWUiOiJCb2IgSm9obnNvbiIsImVtYWlsIjoiYm9iLmpvaG5zb25AZXhhbXBsZS5jb20iLCJyZWdpc3RlckRhdGUiOiIyMDIzLTAyLTIwVDE0OjMwOjAwLjAwMFoiLCJyb2xlIjoiYm9ycm93ZXIiLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTI2VDA2OjQyOjU4LjU5MVoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTI2VDA2OjQyOjU4LjU5MVoiLCJpYXQiOjE3Mjk5MjUwNzYsImV4cCI6MTcyOTkyODY3Nn0.qbTdC4Eo3WwUeFpyyGxT7HvOWkRjZqDXfotlyc6WGno",
+								"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZjZGRmMzM4LWVjNzEtNDg0ZS05NWNiLTU1YjAxNTc5NTAxNyIsIm5hbWUiOiJBbGljZSBTbWl0aCIsImVtYWlsIjoiYWxpY2Uuc21pdGhAZXhhbXBsZS5jb20iLCJyZWdpc3RlckRhdGUiOiIyMDIzLTAxLTE1VDEwOjAwOjAwLjAwMFoiLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjA1OjAzLjk0MloiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjA1OjAzLjk0MloiLCJpYXQiOjE3Mjk5NTU4MzYsImV4cCI6MTcyOTk1OTQzNn0.Nl1Bh8VaTrIr0xWaKunsdOk6rdFQ-ctKzZ-LY9Tr7xk",
 								"type": "text"
 							}
 						],
@@ -127,7 +127,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZjZGRmMzM4LWVjNzEtNDg0ZS05NWNiLTU1YjAxNTc5NTAxNyIsIm5hbWUiOiJBbGljZSBTbWl0aCIsImVtYWlsIjoiYWxpY2Uuc21pdGhAZXhhbXBsZS5jb20iLCJyZWdpc3RlckRhdGUiOiIyMDIzLTAxLTE1VDEwOjAwOjAwLjAwMFoiLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjA1OjAzLjk0MloiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjA1OjAzLjk0MloiLCJpYXQiOjE3Mjk5NTAzOTgsImV4cCI6MTcyOTk1Mzk5OH0.sOBIXZT4V8Ff4Ohcowugb17DsfJLHyY_lIJ4G_uKQj0",
+								"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE0OTU4ZWMyLTJjOGYtNGUwYi1hNGY0LWI1NTdlMjIwMDU4NyIsIm5hbWUiOiJBbGljZSBTbWl0aCIsImVtYWlsIjoiYWxpY2Uuc21pdGhAZXhhbXBsZS5jb20iLCJyZWdpc3RlckRhdGUiOiIyMDIzLTAxLTE1VDEwOjAwOjAwLjAwMFoiLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTI2VDE3OjAwOjE4LjgwOVoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTI2VDE3OjAwOjE4LjgwOVoiLCJpYXQiOjE3Mjk5NjIxNDgsImV4cCI6MTcyOTk2NTc0OH0.OZSkQNziDSsI9OIG1jRlVZ6DMFcgFiqz-twx3IvpjZs",
 								"type": "text"
 							}
 						],
@@ -243,7 +243,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZjZGRmMzM4LWVjNzEtNDg0ZS05NWNiLTU1YjAxNTc5NTAxNyIsIm5hbWUiOiJBbGljZSBTbWl0aCIsImVtYWlsIjoiYWxpY2Uuc21pdGhAZXhhbXBsZS5jb20iLCJyZWdpc3RlckRhdGUiOiIyMDIzLTAxLTE1VDEwOjAwOjAwLjAwMFoiLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjA1OjAzLjk0MloiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjA1OjAzLjk0MloiLCJpYXQiOjE3Mjk5NDc5MjgsImV4cCI6MTcyOTk1MTUyOH0.mHTSkKTMPc2YRu0kgpdkHvJBmSVPho2vN2oKnd87mN0",
+								"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZjZGRmMzM4LWVjNzEtNDg0ZS05NWNiLTU1YjAxNTc5NTAxNyIsIm5hbWUiOiJBbGljZSBTbWl0aCIsImVtYWlsIjoiYWxpY2Uuc21pdGhAZXhhbXBsZS5jb20iLCJyZWdpc3RlckRhdGUiOiIyMDIzLTAxLTE1VDEwOjAwOjAwLjAwMFoiLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjA1OjAzLjk0MloiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjA1OjAzLjk0MloiLCJpYXQiOjE3Mjk5NTU4MzYsImV4cCI6MTcyOTk1OTQzNn0.Nl1Bh8VaTrIr0xWaKunsdOk6rdFQ-ctKzZ-LY9Tr7xk",
 								"type": "text"
 							}
 						],
@@ -284,13 +284,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNmMmU0ZjgzLWRlNWYtNGI1My1iZTU2LWU4NjFiNTUyN2VkOCIsIm5hbWUiOiJBbGljZSBTbWl0aCIsImVtYWlsIjoiYWxpY2Uuc21pdGhAZXhhbXBsZS5jb20iLCJyZWdpc3RlckRhdGUiOiIyMDIzLTAxLTE1VDEwOjAwOjAwLjAwMFoiLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTI1VDE1OjM0OjQ2LjQ4NVoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTI1VDE1OjM0OjQ2LjQ4NVoiLCJpYXQiOjE3Mjk4NzA0OTEsImV4cCI6MTcyOTg3NDA5MX0.yhLZc1EnBKV5jacFs_rEA8QDukocKUxewyZCnX7nOQU",
+								"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZjZGRmMzM4LWVjNzEtNDg0ZS05NWNiLTU1YjAxNTc5NTAxNyIsIm5hbWUiOiJBbGljZSBTbWl0aCIsImVtYWlsIjoiYWxpY2Uuc21pdGhAZXhhbXBsZS5jb20iLCJyZWdpc3RlckRhdGUiOiIyMDIzLTAxLTE1VDEwOjAwOjAwLjAwMFoiLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjA1OjAzLjk0MloiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjA1OjAzLjk0MloiLCJpYXQiOjE3Mjk5NjAwNzksImV4cCI6MTcyOTk2MzY3OX0.fqw2bMl-UKuizaZZ_K2psxlI4vseuc9z5dAvCoMdtZ8",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"This is a new book\",\r\n    \"isbn\": \"978-120-722-914-9\",\r\n    \"author\": \"Mohamed Wagih\"\r\n}",
+							"raw": "{\r\n    \"title\": \"This is a new book\",\r\n    \"isbn\": \"978-120-722-813-0\",\r\n    \"author\": \"Mohamed Wagih\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -316,7 +316,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZjZGRmMzM4LWVjNzEtNDg0ZS05NWNiLTU1YjAxNTc5NTAxNyIsIm5hbWUiOiJBbGljZSBTbWl0aCIsImVtYWlsIjoiYWxpY2Uuc21pdGhAZXhhbXBsZS5jb20iLCJyZWdpc3RlckRhdGUiOiIyMDIzLTAxLTE1VDEwOjAwOjAwLjAwMFoiLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjA1OjAzLjk0MloiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjA1OjAzLjk0MloiLCJpYXQiOjE3Mjk5NDc5MjgsImV4cCI6MTcyOTk1MTUyOH0.mHTSkKTMPc2YRu0kgpdkHvJBmSVPho2vN2oKnd87mN0",
+								"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE0OTU4ZWMyLTJjOGYtNGUwYi1hNGY0LWI1NTdlMjIwMDU4NyIsIm5hbWUiOiJBbGljZSBTbWl0aCIsImVtYWlsIjoiYWxpY2Uuc21pdGhAZXhhbXBsZS5jb20iLCJyZWdpc3RlckRhdGUiOiIyMDIzLTAxLTE1VDEwOjAwOjAwLjAwMFoiLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTI2VDE3OjAwOjE4LjgwOVoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTI2VDE3OjAwOjE4LjgwOVoiLCJpYXQiOjE3Mjk5NjIxNDgsImV4cCI6MTcyOTk2NTc0OH0.OZSkQNziDSsI9OIG1jRlVZ6DMFcgFiqz-twx3IvpjZs",
 								"type": "text"
 							}
 						],
@@ -330,13 +330,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}api/books/d10aeb4c-6b4e-440e-accc-85edf8998838",
+							"raw": "{{base_url}}api/books/90fc6466-8c1a-41d3-b229-6e05ff6ce358",
 							"host": [
 								"{{base_url}}api"
 							],
 							"path": [
 								"books",
-								"d10aeb4c-6b4e-440e-accc-85edf8998838"
+								"90fc6466-8c1a-41d3-b229-6e05ff6ce358"
 							]
 						}
 					},
@@ -349,7 +349,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZjZGRmMzM4LWVjNzEtNDg0ZS05NWNiLTU1YjAxNTc5NTAxNyIsIm5hbWUiOiJBbGljZSBTbWl0aCIsImVtYWlsIjoiYWxpY2Uuc21pdGhAZXhhbXBsZS5jb20iLCJyZWdpc3RlckRhdGUiOiIyMDIzLTAxLTE1VDEwOjAwOjAwLjAwMFoiLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjA1OjAzLjk0MloiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjA1OjAzLjk0MloiLCJpYXQiOjE3Mjk5NDc5MjgsImV4cCI6MTcyOTk1MTUyOH0.mHTSkKTMPc2YRu0kgpdkHvJBmSVPho2vN2oKnd87mN0",
+								"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE0OTU4ZWMyLTJjOGYtNGUwYi1hNGY0LWI1NTdlMjIwMDU4NyIsIm5hbWUiOiJBbGljZSBTbWl0aCIsImVtYWlsIjoiYWxpY2Uuc21pdGhAZXhhbXBsZS5jb20iLCJyZWdpc3RlckRhdGUiOiIyMDIzLTAxLTE1VDEwOjAwOjAwLjAwMFoiLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTI2VDE3OjAwOjE4LjgwOVoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTI2VDE3OjAwOjE4LjgwOVoiLCJpYXQiOjE3Mjk5NjIxNDgsImV4cCI6MTcyOTk2NTc0OH0.OZSkQNziDSsI9OIG1jRlVZ6DMFcgFiqz-twx3IvpjZs",
 								"type": "text"
 							}
 						],
@@ -363,13 +363,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}api/books/71cba56d-324a-473d-90c9-92eb43ba5559",
+							"raw": "{{base_url}}api/books/27d6f191-4289-4bb9-b024-bcf36472ba2d",
 							"host": [
 								"{{base_url}}api"
 							],
 							"path": [
 								"books",
-								"71cba56d-324a-473d-90c9-92eb43ba5559"
+								"27d6f191-4289-4bb9-b024-bcf36472ba2d"
 							]
 						}
 					},
