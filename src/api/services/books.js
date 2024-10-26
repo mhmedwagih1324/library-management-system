@@ -56,7 +56,7 @@ const BooksServices = {
       where: searchObject,
       limit: limit !== -1 ? limit : null,
       offset: limit !== -1 ? offset : null,
-      attributes: ["id", "title", "author", "isbn", "available_quantity"],
+      attributes: { exclude: ["TSValue"] },
     });
 
     return { books };
@@ -81,8 +81,8 @@ const BooksServices = {
         title,
         author,
         isbn,
-        available_quantity: availableQuantity,
-        shelf_location: shelfLocation,
+        availableQuantity,
+        shelfLocation,
       });
     } catch (err) {
       throw new APIError({
@@ -91,7 +91,7 @@ const BooksServices = {
       });
     }
 
-    return { book };
+    return { book: _.omit(book.dataValues, "TSValue") };
   },
 
   /**
@@ -128,8 +128,8 @@ const BooksServices = {
           title,
           author,
           isbn,
-          available_quantity: availableQuantity,
-          shelf_location: shelfLocation,
+          availableQuantity,
+          shelfLocation,
         },
         {
           where: { id },

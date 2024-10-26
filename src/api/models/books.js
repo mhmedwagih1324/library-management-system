@@ -30,14 +30,14 @@ const Book = sequelize.define(
         is: ISBN_REGEX,
       },
     },
-    available_quantity: {
+    availableQuantity: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
       validate: {
         min: 0,
       },
     },
-    shelf_location: {
+    shelfLocation: {
       type: DataTypes.ENUM,
       values: SHELF_LOCATIONS,
       defaultValue: TOP_SHELF,

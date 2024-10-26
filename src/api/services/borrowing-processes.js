@@ -34,7 +34,7 @@ const BorrowingProcessesServices = {
       throw new APIError({ message: "book not found", status: NOT_FOUND });
     }
 
-    if (book.available_quantity === 0) {
+    if (book.availableQuantity === 0) {
       throw new APIError({
         message: "book isn't available right now",
         status: UNPROCESSABLE_ENTITY,
@@ -55,15 +55,12 @@ const BorrowingProcessesServices = {
 
     /* NOTE: The following process doesn't need to be done as transaction, 
       as when creating a borrowing process for a book that is currently was available
-      both try to decrement the book available_quantity first and if this wasn't successful,
+      both try to decrement the book availableQuantity first and if this wasn't successful,
       the next transaction (creating the borrowing process) wouldn't run.
     */
     let borrowingProcess;
     try {
-      await Book.decrement(
-        { available_quantity: 1 },
-        { where: { id: bookId } }
-      );
+      await Book.decrement({ availableQuantity: 1 }, { where: { id: bookId } });
 
       borrowingProcess = await BorrowingProcess.create(
         {
@@ -118,10 +115,7 @@ const BorrowingProcessesServices = {
 
     let updatedBorrowingProcesses;
     try {
-      await Book.increment(
-        { available_quantity: 1 },
-        { where: { id: bookId } }
-      );
+      await Book.increment({ availableQuantity: 1 }, { where: { id: bookId } });
 
       updatedBorrowingProcesses = await BorrowingProcess.update(
         {
@@ -162,7 +156,7 @@ const BorrowingProcessesServices = {
       include: [
         {
           model: Book,
-          attributes: ["title", "author", "available_quantity"],
+          attributes: ["title", "author", "availableQuantity"],
         },
         {
           model: User,

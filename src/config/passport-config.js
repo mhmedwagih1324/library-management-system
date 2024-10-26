@@ -6,12 +6,12 @@ import _ from "lodash";
 const jwtHandler = async (jwt_payload, done) => {
   const { id, email } = jwt_payload;
 
-  let user = await User.findOne({ where: { id, email } });
+  let user = await User.findOne({ where: { id, email }, raw: true });
 
-  if (_.isNil(user?.dataValues)) {
+  if (_.isNil(user)) {
     return done(null, false);
   } else {
-    return done(null, user.dataValues);
+    return done(null, user);
   }
 };
 
