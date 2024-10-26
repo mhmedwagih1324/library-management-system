@@ -33,4 +33,12 @@ router.put(
   tryCatch(BooksController.updateBook)
 );
 
+router.delete(
+  "/:id",
+  authenticate,
+  authorize(BooksAuthorization.deleteBook),
+  validate(BooksValidation.deleteBook),
+  tryCatch(BooksController.deleteBook)
+);
+
 export default router;

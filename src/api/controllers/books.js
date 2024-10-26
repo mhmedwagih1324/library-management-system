@@ -23,6 +23,14 @@ const BooksController = {
 
     return res.status(ACCEPTED).json(result);
   },
+
+  async deleteBook(req, res, next) {
+    const { id: bookId } = req.params;
+
+    const result = await BooksServices.deleteBook({ bookId });
+
+    return res.status(ACCEPTED).json(result);
+  },
 };
 
 export default BooksController;

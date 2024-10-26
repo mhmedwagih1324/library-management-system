@@ -4,10 +4,16 @@ const BooksAuthorization = {
   listBooks: {
     roles: ALL_ROLES,
   },
+
   addBook: {
     roles: [ADMIN],
   },
+
   updateBook: {
+    roles: [ADMIN],
+  },
+
+  deleteBook: {
     roles: [ADMIN],
   },
 };

@@ -45,6 +45,12 @@ const BooksValidation = {
         .default(TOP_SHELF),
     },
   },
+
+  deleteBook: {
+    params: {
+      id: UUIDV4Schema,
+    },
+  },
 };
 
 export default BooksValidation;

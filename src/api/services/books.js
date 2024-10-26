@@ -147,6 +147,35 @@ const BooksServices = {
 
     return { book };
   },
+
+  /**
+   * deletes a book from library
+   *
+   * @param {Object} args
+   * @prop {String} args.bookId
+   *
+   * @return {Promise<Object>} { book }
+   */
+  async deleteBook({ bookId }) {
+    const book = await Book.findOne({ raw: true, where: { id: bookId } });
+
+    if (_.isNil(book)) {
+      throw new APIError({ message: "book not found", status: NOT_FOUND });
+    }
+
+    try {
+      await Book.destroy({
+        where: { id: bookId },
+      });
+    } catch (err) {
+      throw new APIError({
+        status: CONFLICT,
+        message: `Couldn't delete book, details: ${err.message}`,
+      });
+    }
+
+    return { book };
+  },
 };
 
 export default BooksServices;
