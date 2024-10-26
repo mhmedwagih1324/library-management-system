@@ -29,6 +29,7 @@ router.get(
   "/overdue",
   authenticate,
   authorize(BorrowingProcessesAuthorization.listOverdueBorrows),
+  validate(BorrowingProcessValidation.listOverdueBorrows),
   tryCatch(BorrowingProcessesController.listOverdueBorrows)
 );
 

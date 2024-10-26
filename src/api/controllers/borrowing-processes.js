@@ -29,7 +29,9 @@ const BorrowingProcessController = {
   },
 
   async listOverdueBorrows(req, res, next) {
-    const result = await BorrowingProcessesServices.listOverdueBorrows();
+    const result = await BorrowingProcessesServices.listOverdueBorrows({
+      ...req.query,
+    });
 
     return res.status(OK).json(result);
   },

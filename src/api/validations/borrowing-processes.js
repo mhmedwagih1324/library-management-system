@@ -1,4 +1,8 @@
-import { UUIDV4Schema } from "../../common/schemas/joi-schemas.js";
+import {
+  PAGINATION_LIMIT_SCHEMA,
+  PAGINATION_OFFSET_SCHEMA,
+  UUIDV4Schema,
+} from "../../common/schemas/joi-schemas.js";
 
 const BorrowingProcessValidation = {
   checkoutBook: {
@@ -10,6 +14,13 @@ const BorrowingProcessValidation = {
   returnBook: {
     params: {
       id: UUIDV4Schema,
+    },
+  },
+
+  listOverdueBorrows: {
+    query: {
+      limit: PAGINATION_LIMIT_SCHEMA,
+      offset: PAGINATION_OFFSET_SCHEMA,
     },
   },
 };

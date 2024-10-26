@@ -28,7 +28,11 @@ const BorrowingProcessesServices = {
   async checkoutBook({ bookId }, { callerId }) {
     const borrowerId = callerId;
 
-    const book = await Book.findOne({ raw: true, where: { id: bookId } });
+    const book = await Book.findOne({
+      raw: true,
+      where: { id: bookId },
+      attributes: { exclude: ["TSValue"] },
+    });
 
     if (_.isNil(book)) {
       throw new APIError({ message: "book not found", status: NOT_FOUND });
@@ -78,7 +82,13 @@ const BorrowingProcessesServices = {
         message: `Couldn't create borrowing-process: ${error.message}`,
       });
     }
-    return { borrowingProcess };
+
+    return {
+      borrowingProcess: {
+        ..._.omit(borrowingProcess.dataValues, ["bookId"]),
+        book,
+      },
+    };
   },
 
   /**
@@ -95,7 +105,11 @@ const BorrowingProcessesServices = {
   async returnBook({ bookId }, { callerId }) {
     const borrowerId = callerId;
 
-    const book = await Book.findOne({ raw: true, where: { id: bookId } });
+    const book = await Book.findOne({
+      raw: true,
+      where: { id: bookId },
+      attributes: { exclude: ["TSValue"] },
+    });
 
     if (_.isNil(book)) {
       throw new APIError({ message: "book not found", status: NOT_FOUND });
@@ -137,15 +151,24 @@ const BorrowingProcessesServices = {
 
     const [borrowingProcess] = updatedBorrowingProcesses[1];
 
-    return { borrowingProcess };
+    return {
+      borrowingProcess: {
+        ..._.omit(borrowingProcess.dataValues, ["bookId"]),
+        book,
+      },
+    };
   },
 
   /**
    * lists overdue borrows
    *
+   * @param {Object} args
+   * @prop {Number} args.limit
+   * @prop {Number} args.offset
+   *
    * @returns {Promise<{Object}>} { overdueBorrows }
    */
-  async listOverdueBorrows() {
+  async listOverdueBorrows({ limit, offset }) {
     const overdueBorrows = await BorrowingProcess.findAll({
       raw: true,
       where: {
@@ -163,6 +186,8 @@ const BorrowingProcessesServices = {
           attributes: ["name", "email"],
         },
       ],
+      limit: limit !== -1 ? limit : null,
+      offset: limit !== -1 ? offset : null,
     });
 
     return { overdueBorrows };
