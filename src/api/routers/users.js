@@ -47,4 +47,12 @@ router.delete(
   tryCatch(UsersController.deleteBorrower)
 );
 
+router.get(
+  "/borrowers",
+  authenticate,
+  authorize(UsersAuthorization.listBorrowers),
+  validate(UsersValidation.listBorrowers),
+  tryCatch(UsersController.listBorrowers)
+);
+
 export default router;

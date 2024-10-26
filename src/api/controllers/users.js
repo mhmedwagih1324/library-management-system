@@ -47,6 +47,14 @@ const UsersController = {
 
     return res.status(ACCEPTED).json(result);
   },
+
+  async listBorrowers(req, res, next) {
+    const { limit, offset } = req.query;
+
+    const result = await UsersServices.listBorrowers({ limit, offset });
+
+    return res.status(OK).json(result);
+  },
 };
 
 export default UsersController;

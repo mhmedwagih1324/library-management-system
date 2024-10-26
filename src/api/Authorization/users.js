@@ -16,6 +16,10 @@ const UsersAuthorization = {
   deleteBorrower: {
     roles: [ADMIN],
   },
+
+  listBorrowers: {
+    roles: [ADMIN],
+  },
 };
 
 export default UsersAuthorization;

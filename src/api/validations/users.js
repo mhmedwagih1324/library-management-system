@@ -1,6 +1,10 @@
 import Joi from "joi";
 import { EMAIL_REGEX } from "../../common/constants.js";
-import { UUIDV4Schema } from "../../common/schemas/joi-schemas.js";
+import {
+  PAGINATION_LIMIT_SCHEMA,
+  PAGINATION_OFFSET_SCHEMA,
+  UUIDV4Schema,
+} from "../../common/schemas/joi-schemas.js";
 
 const UsersValidation = {
   registerBorrower: {
@@ -24,8 +28,8 @@ const UsersValidation = {
 
   listCallerBorrowingProcesses: {
     query: {
-      limit: Joi.number().min(5).max(100).default(25).allow(-1),
-      offset: Joi.number().min(0).default(0),
+      limit: PAGINATION_LIMIT_SCHEMA,
+      offset: PAGINATION_OFFSET_SCHEMA,
     },
   },
 
@@ -39,6 +43,13 @@ const UsersValidation = {
   deleteBorrower: {
     params: {
       id: UUIDV4Schema,
+    },
+  },
+
+  listBorrowers: {
+    query: {
+      limit: PAGINATION_LIMIT_SCHEMA,
+      offset: PAGINATION_OFFSET_SCHEMA,
     },
   },
 };

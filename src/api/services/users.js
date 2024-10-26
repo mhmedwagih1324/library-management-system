@@ -175,6 +175,7 @@ const UsersServices = {
     const borrower = await User.findOne({
       raw: true,
       where: { id: borrowerId, role: BORROWER },
+      attributes: ["id", "name", "email", "registerDate", "role"],
     });
 
     if (_.isNil(borrower)) {
@@ -193,6 +194,27 @@ const UsersServices = {
     }
 
     return { borrower };
+  },
+
+  /**
+   * lists all borrowers in the library
+   *
+   * @param {Object} args
+   * @prop {Number} args.limit
+   * @prop {Number} args.offset
+   *
+   * @return {Promise<Object>} { borrowers }
+   */
+  async listBorrowers({ limit, offset }) {
+    const borrowers = await User.findAll({
+      raw: true,
+      where: { role: BORROWER },
+      limit: limit !== -1 ? limit : null,
+      offset: limit !== -1 ? offset : null, // FIXME: Need to search about the effect of offset when scaling bigger
+      attributes: ["id", "name", "email", "registerDate", "role"],
+    });
+
+    return { borrowers };
   },
 };
 
