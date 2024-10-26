@@ -6,9 +6,7 @@ const { OK, CREATED, ACCEPTED } = httpStatus;
 
 const BooksController = {
   async listBooks(req, res, next) {
-    const { limit } = req.query;
-
-    const books = await BooksServices.listBooks({ limit });
+    const books = await BooksServices.listBooks({ ...req.query });
 
     return res.status(OK).send(books);
   },

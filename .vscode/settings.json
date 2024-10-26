@@ -2,13 +2,17 @@
   "files.eol": "\n",
   "cSpell.words": [
     "dbadmin",
+    "fulltext",
     "hstore",
     "PGDATABASE",
     "PGHOST",
     "PGPASSWORD",
     "PGPORT",
     "PGUSER",
-    "UUIDV"
+    "tsquery",
+    "TSVECTOR",
+    "UUIDV",
+    "websearch"
   ],
   "eslint.enable": true,
   "editor.tabSize": 2,

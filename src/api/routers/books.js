@@ -11,6 +11,8 @@ const router = new Router();
 
 router.get(
   "/",
+  authenticate,
+  authorize(BooksAuthorization.listBooks),
   validate(BooksValidation.listBooks),
   tryCatch(BooksController.listBooks)
 );

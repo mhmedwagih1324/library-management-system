@@ -1,6 +1,9 @@
-import { ADMIN } from "../constants/index.js";
+import { ADMIN, ALL_ROLES } from "../constants/index.js";
 
 const BooksAuthorization = {
+  listBooks: {
+    roles: ALL_ROLES,
+  },
   addBook: {
     roles: [ADMIN],
   },

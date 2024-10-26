@@ -2,6 +2,8 @@ import _ from "lodash";
 import APIError from "../../common/lib/api-error.js";
 import Book from "../models/books.js";
 import httpStatus from "http-status";
+import { Op } from "sequelize";
+import sequelize from "../../config/db.js";
 
 const { NOT_FOUND, CONFLICT } = httpStatus;
 
@@ -10,18 +12,54 @@ const BooksServices = {
    * Lists books in the library
    *
    * @param {Object} args
-   * @param {Object} args
+   * @prop {String} args.title
+   * @prop {String} args.author
+   * @prop {String} args.isbn
+   * @prop {Number} args.limit
+   * @prop {Number} args.offset
    *
+   * @returns {Promise<[Object]>} { books }
    */
-  async listBooks({ limit }) {
-    const books = await Book.findAll({ limit });
-    if (_.isNil(books)) {
-      throw new APIError({
-        message: "hi this is me",
-        status: NOT_FOUND,
-      });
+  async listBooks({ title, author, isbn, limit, offset }) {
+    // FIXME: The endpoint only matches a whole word, but doesn't match any of its prefixes
+    let textSearchValue = ``;
+
+    if (title && title !== "") {
+      title = title.split(/\s+/).join(" <-> ");
+      textSearchValue = textSearchValue.concat(title).concat("*");
     }
-    return books;
+
+    if (author && author !== "") {
+      author = author.split(/\s+/).join(" <-> ");
+      textSearchValue = _.isEmpty(textSearchValue)
+        ? textSearchValue.concat(author).concat("*")
+        : textSearchValue.concat(" | ", author).concat("*");
+    }
+
+    if (isbn && isbn !== "") {
+      isbn = isbn.split(/\s+/).join(" <-> ");
+      textSearchValue = _.isEmpty(textSearchValue)
+        ? textSearchValue.concat(isbn).concat("*")
+        : textSearchValue.concat(" | ", isbn).concat("*");
+    }
+    textSearchValue = textSearchValue.trimEnd();
+
+    const searchObject = !_.isEmpty(textSearchValue)
+      ? {
+          TSValue: {
+            [Op.match]: sequelize.fn("to_tsquery", "english", textSearchValue),
+          },
+        }
+      : {};
+
+    const books = await Book.findAll({
+      where: searchObject,
+      limit: limit !== -1 ? limit : null,
+      offset: limit !== -1 ? offset : null,
+      attributes: ["id", "title", "author", "isbn", "available_quantity"],
+    });
+
+    return { books };
   },
 
   /**
