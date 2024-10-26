@@ -1,0 +1,520 @@
+{
+	"info": {
+		"_postman_id": "cc57c16d-2858-40aa-ac5a-30fcd284f7ec",
+		"name": "Library-management-system",
+		"description": "# 🚀 Get started here\n\nThis postman bundle of requests are meant to test endpoints of the [Library Mangement System](https://github.com/mhmedwagih1324/library-management-system) made by [@mhmedwagih1324](https://github.com/mhmedwagih1324/).\n\n- Please make sure that the docker-compose is up and both containers (of api & database) are running before trying to run any request.\n    \n- Please also note that requests are organized the same as code in the repo in routers.\n    \n- Most of the endpoints needs authentication, and you can authenticate any user using its email & password added in the `src/database/seed.js` you may get the credintials from there and call the endpoint `authenticateUser` , get the token and put it in your test headers under `authorization` and add \\`JWT \\` before the token.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28348431"
+	},
+	"item": [
+		{
+			"name": "Users-endpoints",
+			"item": [
+				{
+					"name": "authenticateUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"alice.smith@example.com\", // admin user\r\n    \"password\": \"hashed_password_1\"\r\n    // \"email\": \"bob.johnson@example.com\", // borrower\r\n    // \"password\": \"hashed_password_2\"\r\n    // \"email\": \"wigo@coligo.com\", // new borrower\r\n    // \"password\": \"slkdfhhodsinreww324\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}api/users/authenticate",
+							"host": [
+								"{{base_url}}api"
+							],
+							"path": [
+								"users",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "registerBorrower",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZjZGRmMzM4LWVjNzEtNDg0ZS05NWNiLTU1YjAxNTc5NTAxNyIsIm5hbWUiOiJBbGljZSBTbWl0aCIsImVtYWlsIjoiYWxpY2Uuc21pdGhAZXhhbXBsZS5jb20iLCJyZWdpc3RlckRhdGUiOiIyMDIzLTAxLTE1VDEwOjAwOjAwLjAwMFoiLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjA1OjAzLjk0MloiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjA1OjAzLjk0MloiLCJpYXQiOjE3Mjk5NDc5MjgsImV4cCI6MTcyOTk1MTUyOH0.mHTSkKTMPc2YRu0kgpdkHvJBmSVPho2vN2oKnd87mN0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Mohamed Wagih\",\r\n    \"email\": \"wigo@coligo.com\",\r\n    \"password\": \"slkdfhhodsinreww324\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}api/users/register-borrower",
+							"host": [
+								"{{base_url}}api"
+							],
+							"path": [
+								"users",
+								"register-borrower"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listCallerBorrowingProcesses",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM4MWY4Y2YxLWIyYTItNGI3OC1hODNhLWM0Yjc1YTVlZTQzYSIsIm5hbWUiOiJCb2IgSm9obnNvbiIsImVtYWlsIjoiYm9iLmpvaG5zb25AZXhhbXBsZS5jb20iLCJyZWdpc3RlckRhdGUiOiIyMDIzLTAyLTIwVDE0OjMwOjAwLjAwMFoiLCJyb2xlIjoiYm9ycm93ZXIiLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTI2VDA2OjQyOjU4LjU5MVoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTI2VDA2OjQyOjU4LjU5MVoiLCJpYXQiOjE3Mjk5MjUwNzYsImV4cCI6MTcyOTkyODY3Nn0.qbTdC4Eo3WwUeFpyyGxT7HvOWkRjZqDXfotlyc6WGno",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}api/users/me/borrowing-processes?limit=-1&offset=0",
+							"host": [
+								"{{base_url}}api"
+							],
+							"path": [
+								"users",
+								"me",
+								"borrowing-processes"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "-1"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listBorrowers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZjZGRmMzM4LWVjNzEtNDg0ZS05NWNiLTU1YjAxNTc5NTAxNyIsIm5hbWUiOiJBbGljZSBTbWl0aCIsImVtYWlsIjoiYWxpY2Uuc21pdGhAZXhhbXBsZS5jb20iLCJyZWdpc3RlckRhdGUiOiIyMDIzLTAxLTE1VDEwOjAwOjAwLjAwMFoiLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjA1OjAzLjk0MloiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjA1OjAzLjk0MloiLCJpYXQiOjE3Mjk5NTAzOTgsImV4cCI6MTcyOTk1Mzk5OH0.sOBIXZT4V8Ff4Ohcowugb17DsfJLHyY_lIJ4G_uKQj0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}api/users/borrowers?limit=5&offset=2",
+							"host": [
+								"{{base_url}}api"
+							],
+							"path": [
+								"users",
+								"borrowers"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "offset",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateBorrower",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViMmY1YjM5LTU1ZGUtNGZlYy05NzgzLTYxOWJmYTUyMmEwNiIsIm5hbWUiOiJBbGljZSBTbWl0aCIsImVtYWlsIjoiYWxpY2Uuc21pdGhAZXhhbXBsZS5jb20iLCJyZWdpc3RlckRhdGUiOiIyMDIzLTAxLTE1VDEwOjAwOjAwLjAwMFoiLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTI1VDE1OjQ3OjQ0LjkzNFoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTI1VDE1OjQ3OjQ0LjkzNFoiLCJpYXQiOjE3Mjk4NzM2OTAsImV4cCI6MTcyOTg3NzI5MH0.xDL3cAIB1-3W7NuJWzAyQTItFIxbiOfnQU-4LJehJrc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Sherry Sherry\",\r\n    \"email\": \"sherry15@home.com\"\r\n    // \"password\": \"jfkldsjklfjsdlnreww324\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}api/users/borrowers/ad644f2d-1683-4a70-b9e2-2d1c07be61ff",
+							"host": [
+								"{{base_url}}api"
+							],
+							"path": [
+								"users",
+								"borrowers",
+								"ad644f2d-1683-4a70-b9e2-2d1c07be61ff"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteBorrower",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZjZGRmMzM4LWVjNzEtNDg0ZS05NWNiLTU1YjAxNTc5NTAxNyIsIm5hbWUiOiJBbGljZSBTbWl0aCIsImVtYWlsIjoiYWxpY2Uuc21pdGhAZXhhbXBsZS5jb20iLCJyZWdpc3RlckRhdGUiOiIyMDIzLTAxLTE1VDEwOjAwOjAwLjAwMFoiLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjA1OjAzLjk0MloiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjA1OjAzLjk0MloiLCJpYXQiOjE3Mjk5NDc5MjgsImV4cCI6MTcyOTk1MTUyOH0.mHTSkKTMPc2YRu0kgpdkHvJBmSVPho2vN2oKnd87mN0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Sherry Sherry\",\r\n    \"email\": \"sherry15@home.com\"\r\n    // \"password\": \"jfkldsjklfjsdlnreww324\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}api/users/borrowers/3b014618-a0b4-4518-9aa8-55856f4469ca",
+							"host": [
+								"{{base_url}}api"
+							],
+							"path": [
+								"users",
+								"borrowers",
+								"3b014618-a0b4-4518-9aa8-55856f4469ca"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Books-endpoints",
+			"item": [
+				{
+					"name": "listBooks",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZjZGRmMzM4LWVjNzEtNDg0ZS05NWNiLTU1YjAxNTc5NTAxNyIsIm5hbWUiOiJBbGljZSBTbWl0aCIsImVtYWlsIjoiYWxpY2Uuc21pdGhAZXhhbXBsZS5jb20iLCJyZWdpc3RlckRhdGUiOiIyMDIzLTAxLTE1VDEwOjAwOjAwLjAwMFoiLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjA1OjAzLjk0MloiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjA1OjAzLjk0MloiLCJpYXQiOjE3Mjk5NDc5MjgsImV4cCI6MTcyOTk1MTUyOH0.mHTSkKTMPc2YRu0kgpdkHvJBmSVPho2vN2oKnd87mN0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}api/books",
+							"host": [
+								"{{base_url}}api"
+							],
+							"path": [
+								"books"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "-1",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "Deep Learning",
+									"disabled": true
+								},
+								{
+									"key": "author",
+									"value": "Leonardo",
+									"disabled": true
+								}
+							]
+						},
+						"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+					},
+					"response": []
+				},
+				{
+					"name": "addBook",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNmMmU0ZjgzLWRlNWYtNGI1My1iZTU2LWU4NjFiNTUyN2VkOCIsIm5hbWUiOiJBbGljZSBTbWl0aCIsImVtYWlsIjoiYWxpY2Uuc21pdGhAZXhhbXBsZS5jb20iLCJyZWdpc3RlckRhdGUiOiIyMDIzLTAxLTE1VDEwOjAwOjAwLjAwMFoiLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTI1VDE1OjM0OjQ2LjQ4NVoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTI1VDE1OjM0OjQ2LjQ4NVoiLCJpYXQiOjE3Mjk4NzA0OTEsImV4cCI6MTcyOTg3NDA5MX0.yhLZc1EnBKV5jacFs_rEA8QDukocKUxewyZCnX7nOQU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"This is a new book\",\r\n    \"isbn\": \"978-120-722-914-9\",\r\n    \"author\": \"Mohamed Wagih\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}api/books",
+							"host": [
+								"{{base_url}}api"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateBook",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZjZGRmMzM4LWVjNzEtNDg0ZS05NWNiLTU1YjAxNTc5NTAxNyIsIm5hbWUiOiJBbGljZSBTbWl0aCIsImVtYWlsIjoiYWxpY2Uuc21pdGhAZXhhbXBsZS5jb20iLCJyZWdpc3RlckRhdGUiOiIyMDIzLTAxLTE1VDEwOjAwOjAwLjAwMFoiLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjA1OjAzLjk0MloiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjA1OjAzLjk0MloiLCJpYXQiOjE3Mjk5NDc5MjgsImV4cCI6MTcyOTk1MTUyOH0.mHTSkKTMPc2YRu0kgpdkHvJBmSVPho2vN2oKnd87mN0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"title\": \"This is not a new book\",\r\n    // \"isbn\": \"978-727-369-697-3\"\r\n    \"availableQuantity\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}api/books/d10aeb4c-6b4e-440e-accc-85edf8998838",
+							"host": [
+								"{{base_url}}api"
+							],
+							"path": [
+								"books",
+								"d10aeb4c-6b4e-440e-accc-85edf8998838"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteBook",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZjZGRmMzM4LWVjNzEtNDg0ZS05NWNiLTU1YjAxNTc5NTAxNyIsIm5hbWUiOiJBbGljZSBTbWl0aCIsImVtYWlsIjoiYWxpY2Uuc21pdGhAZXhhbXBsZS5jb20iLCJyZWdpc3RlckRhdGUiOiIyMDIzLTAxLTE1VDEwOjAwOjAwLjAwMFoiLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjA1OjAzLjk0MloiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjA1OjAzLjk0MloiLCJpYXQiOjE3Mjk5NDc5MjgsImV4cCI6MTcyOTk1MTUyOH0.mHTSkKTMPc2YRu0kgpdkHvJBmSVPho2vN2oKnd87mN0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"title\": \"This is not a new book\",\r\n    // \"isbn\": \"978-727-369-697-3\"\r\n    \"availableQuantity\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}api/books/71cba56d-324a-473d-90c9-92eb43ba5559",
+							"host": [
+								"{{base_url}}api"
+							],
+							"path": [
+								"books",
+								"71cba56d-324a-473d-90c9-92eb43ba5559"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "BorrowingProcesses-endpoints",
+			"item": [
+				{
+					"name": "checkoutBook",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNiMDE0NjE4LWEwYjQtNDUxOC05YWE4LTU1ODU2ZjQ0NjljYSIsIm5hbWUiOiJNb2hhbWVkIFdhZ2loIiwiZW1haWwiOiJ3aWdvQGNvbGlnby5jb20iLCJyZWdpc3RlckRhdGUiOiIyMDI0LTEwLTI2VDEzOjI3OjExLjIwOFoiLCJyb2xlIjoiYm9ycm93ZXIiLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjI3OjExLjIwOVoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTI2VDEzOjI3OjExLjIwOVoiLCJpYXQiOjE3Mjk5NDkyNTQsImV4cCI6MTcyOTk1Mjg1NH0.hP43_3UGJ7oS3-avHiVzqcX-QZy_f6eZzMEmWzLZCno",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}api/borrowingProcesses/checkout-book/d10aeb4c-6b4e-440e-accc-85edf8998838",
+							"host": [
+								"{{base_url}}api"
+							],
+							"path": [
+								"borrowingProcesses",
+								"checkout-book",
+								"d10aeb4c-6b4e-440e-accc-85edf8998838"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "returnBook",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM4MWY4Y2YxLWIyYTItNGI3OC1hODNhLWM0Yjc1YTVlZTQzYSIsIm5hbWUiOiJCb2IgSm9obnNvbiIsImVtYWlsIjoiYm9iLmpvaG5zb25AZXhhbXBsZS5jb20iLCJyZWdpc3RlckRhdGUiOiIyMDIzLTAyLTIwVDE0OjMwOjAwLjAwMFoiLCJyb2xlIjoiYm9ycm93ZXIiLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTI2VDA2OjQyOjU4LjU5MVoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTI2VDA2OjQyOjU4LjU5MVoiLCJpYXQiOjE3Mjk5MjUwNzYsImV4cCI6MTcyOTkyODY3Nn0.qbTdC4Eo3WwUeFpyyGxT7HvOWkRjZqDXfotlyc6WGno",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}api/borrowingProcesses/return-book/50c742e4-69b2-4d29-a275-f468843cc802",
+							"host": [
+								"{{base_url}}api"
+							],
+							"path": [
+								"borrowingProcesses",
+								"return-book",
+								"50c742e4-69b2-4d29-a275-f468843cc802"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listOverdueBorrows",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMxY2JmMWVlLWM1NDctNDgwNi04NWIwLWZmNTdmNWI5Y2FmZiIsIm5hbWUiOiJBbGljZSBTbWl0aCIsImVtYWlsIjoiYWxpY2Uuc21pdGhAZXhhbXBsZS5jb20iLCJyZWdpc3RlckRhdGUiOiIyMDIzLTAxLTE1VDEwOjAwOjAwLjAwMFoiLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDI0LTEwLTI2VDA2OjQyOjU4LjU5MVoiLCJ1cGRhdGVkQXQiOiIyMDI0LTEwLTI2VDA2OjQyOjU4LjU5MVoiLCJpYXQiOjE3Mjk5MjQ5OTgsImV4cCI6MTcyOTkyODU5OH0.Wql8l6VHIIwTtnP8520RrIA03M9W0WThhiTZ55Kzz8E",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}api/borrowingProcesses/overdue",
+							"host": [
+								"{{base_url}}api"
+							],
+							"path": [
+								"borrowingProcesses",
+								"overdue"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_url",
+			"value": "http://localhost:5000/"
+		}
+	]
+}
