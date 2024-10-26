@@ -25,4 +25,11 @@ router.post(
   tryCatch(BorrowingProcessesController.returnBook)
 );
 
+router.get(
+  "/overdue",
+  authenticate,
+  authorize(BorrowingProcessesAuthorization.listOverdueBorrows),
+  tryCatch(BorrowingProcessesController.listOverdueBorrows)
+);
+
 export default router;

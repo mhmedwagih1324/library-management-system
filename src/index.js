@@ -17,7 +17,7 @@ await sequelize
 
     await sequelize.sync();
 
-    await seedDatabase({ destroyOld: true });
+    await seedDatabase({ destroyOld: false });
 
     app.listen(PORT, () => console.log(`Server has started on port: ${PORT}`));
   })

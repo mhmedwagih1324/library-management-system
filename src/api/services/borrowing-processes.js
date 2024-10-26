@@ -2,13 +2,14 @@ import APIError from "../../common/lib/api-error.js";
 import httpStatus from "http-status";
 import _ from "lodash";
 
-import { Book, BorrowingProcess } from "../models/index.js";
+import { Book, BorrowingProcess, User } from "../models/index.js";
 import {
   BORROWING_PROCESS_DEFAULT_PERIOD,
   BORROWING_STATUS_BORROWED,
   BORROWING_STATUS_RETURNED,
 } from "../constants/borrowingProcess.js";
 import moment from "moment";
+import { Op } from "sequelize";
 
 const { CONFLICT, NOT_FOUND, UNPROCESSABLE_ENTITY } = httpStatus;
 
@@ -143,6 +144,34 @@ const BorrowingProcessesServices = {
     const [borrowingProcess] = updatedBorrowingProcesses[1];
 
     return { borrowingProcess };
+  },
+
+  /**
+   * lists overdue borrows
+   *
+   * @returns {Promise<{Object}>} { overdueBorrows }
+   */
+  async listOverdueBorrows() {
+    const overdueBorrows = await BorrowingProcess.findAll({
+      raw: true,
+      where: {
+        status: BORROWING_STATUS_BORROWED,
+        dueDate: { [Op.lt]: new Date() },
+      },
+      attributes: ["id", "dueDate", "createdAt"],
+      include: [
+        {
+          model: Book,
+          attributes: ["title", "author", "available_quantity"],
+        },
+        {
+          model: User,
+          attributes: ["name", "email"],
+        },
+      ],
+    });
+
+    return { overdueBorrows };
   },
 };
 

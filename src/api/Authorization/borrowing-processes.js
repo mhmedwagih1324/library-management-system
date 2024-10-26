@@ -1,4 +1,4 @@
-import { BORROWER } from "../constants/index.js";
+import { ADMIN, BORROWER } from "../constants/index.js";
 
 const BorrowingProcessesAuthorization = {
   checkoutBook: {
@@ -7,6 +7,10 @@ const BorrowingProcessesAuthorization = {
 
   returnBook: {
     roles: [BORROWER],
+  },
+
+  listOverdueBorrows: {
+    roles: [ADMIN],
   },
 };
 

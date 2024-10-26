@@ -25,7 +25,13 @@ const BorrowingProcessController = {
       { callerId }
     );
 
-    return res.status(CREATED).json(result);
+    return res.status(ACCEPTED).json(result);
+  },
+
+  async listOverdueBorrows(req, res, next) {
+    const result = await BorrowingProcessesServices.listOverdueBorrows();
+
+    return res.status(OK).json(result);
   },
 };
 
