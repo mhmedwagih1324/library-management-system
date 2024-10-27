@@ -8,10 +8,10 @@ export const config = {
 
   // Database Connection Strings:
   // should be commented when you need to run with docker-compose
-  PG_LOCAL_CONNECTION_STRING: process.env.PG_LOCAL_CONNECTION_STRING,
+  // PG_LOCAL_CONNECTION_STRING: process.env.PG_LOCAL_CONNECTION_STRING,
 
   // should be commented when you need to run with localhost (or an already running container)
-  // PG_LOCAL_CONNECTION_STRING: process.env.PG_DOCKER_CONNECTION_STRING,
+  PG_LOCAL_CONNECTION_STRING: process.env.PG_DOCKER_CONNECTION_STRING,
 
   // testDB connection string
   PG_TEST_CONNECTION_STRING: process.env.PG_TEST_CONNECTION_STRING,
